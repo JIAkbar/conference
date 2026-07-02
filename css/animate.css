@@ -1,0 +1,56 @@
+/* css/animate.css — scroll reveal, hover polish, header scroll shadow, hero blueprint texture */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.reveal-d1 { transition-delay: 80ms; }
+.reveal-d2 { transition-delay: 160ms; }
+.reveal-d3 { transition-delay: 240ms; }
+
+.grid > .reveal:nth-child(1) { transition-delay: 0ms; }
+.grid > .reveal:nth-child(2) { transition-delay: 80ms; }
+.grid > .reveal:nth-child(3) { transition-delay: 160ms; }
+.grid > .reveal:nth-child(4) { transition-delay: 240ms; }
+.grid > .reveal:nth-child(5) { transition-delay: 320ms; }
+.grid > .reveal:nth-child(6) { transition-delay: 400ms; }
+
+.card {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.btn {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 150ms ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.site-header {
+  transition: box-shadow 200ms ease;
+}
+.site-header.is-scrolled {
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.10);
+}
+
+.hero-grid {
+  position: relative;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center top;
+}
+
+.site-nav a { transition: color 200ms ease, border-color 200ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .card:hover, .card:focus-within { transform: none; }
+  .btn:hover, .btn:active { transform: none; }
+}
