@@ -5,6 +5,7 @@
   if (toggle && nav) {
     toggle.addEventListener("click", function () {
       var isOpen = nav.classList.toggle("is-open");
+      toggle.classList.toggle("is-active", isOpen);
       toggle.setAttribute("aria-expanded", String(isOpen));
     });
   }
