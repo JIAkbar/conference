@@ -5,9 +5,12 @@
   background: rgba(10, 14, 23, 0.35);
   border: 1px solid transparent;
   border-radius: 0;
-  transition: top 250ms ease, left 250ms ease, right 250ms ease, width 250ms ease,
-              background-color 250ms ease, border-color 250ms ease, border-radius 250ms ease,
-              box-shadow 250ms ease, backdrop-filter 250ms ease;
+  /* left/right/top always resolve to explicit lengths (never `auto`) so every
+     property below can interpolate smoothly — CSS cannot animate to/from `auto`. */
+  transition: top 380ms cubic-bezier(0.4, 0, 0.2, 1), left 380ms cubic-bezier(0.4, 0, 0.2, 1),
+              right 380ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 380ms cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 300ms ease, border-color 300ms ease,
+              box-shadow 300ms ease, backdrop-filter 300ms ease;
 }
 .site-header.is-scrolled {
   background: rgba(10, 14, 23, 0.82);
@@ -17,15 +20,14 @@
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
 }
 /* Floating pill: only on desktop widths — on scroll the bar detaches from the
-   viewport edges, gains margin on all sides, and fully rounds its corners. */
+   viewport edges, gains margin on all sides, and fully rounds its corners.
+   left/right use max() instead of left:50%+transform so both states are plain
+   animatable lengths (transform/auto pairs don't transition smoothly). */
 @media (min-width: 768px) {
   .site-header.is-scrolled {
     top: 14px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 1120px;
+    left: max(20px, calc(50% - 560px));
+    right: max(20px, calc(50% - 560px));
     border-radius: 16px;
   }
 }
