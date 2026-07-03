@@ -126,3 +126,10 @@ th { font-family: var(--font-heading); font-weight: 600; background: var(--color
   font-family: var(--font-heading); font-weight: 600; font-size: 1.75rem;
   margin-bottom: var(--space-3);
 }
+.avatar-photo {
+  width: 96px; height: 96px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  border: 2px solid var(--color-border);
+  margin-bottom: var(--space-3);
+  display: block;
+}
