@@ -1,35 +1,30 @@
 /* css/nav.css — header/nav/footer. Fixed, transparent + blurred nav, dropdown submenus,
    theme-aware (light/dark), floating pill on scroll (prisma.io reference) */
+/* Nav is a constantly-floating pill (matches prisma.io: the bar is inset from the
+   viewport at all scroll positions — it does not snap from flush to floating). */
 .site-header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 12px; left: 50%; z-index: 100;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: var(--container-max);
   height: var(--nav-height);
+  border-radius: 12px;
   background: var(--nav-bg-a);
-  border: 1px solid transparent;
-  border-radius: 0;
-  /* left/right/top always resolve to explicit lengths (never `auto`) so every
-     property below can interpolate smoothly — CSS cannot animate to/from `auto`. */
-  transition: top 380ms cubic-bezier(0.4, 0, 0.2, 1), left 380ms cubic-bezier(0.4, 0, 0.2, 1),
-              right 380ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 380ms cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 300ms ease, border-color 300ms ease,
-              box-shadow 300ms ease, backdrop-filter 300ms ease;
+  backdrop-filter: blur(3px) saturate(160%);
+  -webkit-backdrop-filter: blur(3px) saturate(160%);
+  border: 1px solid var(--nav-border-a);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.15);
+  transition: background-color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
 }
 .site-header.is-scrolled {
   background: var(--nav-bg-b);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-color: var(--nav-border-b);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
 }
-/* Floating pill: only on desktop widths — on scroll the bar detaches from the
-   viewport edges, gains margin on all sides, and fully rounds its corners.
-   left/right use max() instead of left:50%+transform so both states are plain
-   animatable lengths (transform/auto pairs don't transition smoothly). */
-@media (min-width: 768px) {
-  .site-header.is-scrolled {
-    top: 14px;
-    left: max(20px, calc(50% - 560px));
-    right: max(20px, calc(50% - 560px));
-    border-radius: 16px;
+@media (max-width: 767px) {
+  .site-header {
+    top: 0; left: 0; right: 0; transform: none;
+    width: 100%; max-width: none; border-radius: 0;
   }
 }
 .site-header .container {
@@ -59,8 +54,8 @@
   position: relative;
   display: inline-block;
   white-space: nowrap;
-  color: var(--color-body); text-decoration: none; font-weight: 500; font-size: 0.875rem;
-  padding: 8px 12px;
+  color: var(--color-body); text-decoration: none; font-weight: 600; font-size: 1rem;
+  padding: 6px 10px;
 }
 .site-nav a::after {
   content: "";
@@ -79,8 +74,8 @@
 .nav-dropdown-trigger {
   display: inline-flex; align-items: center; gap: 4px;
   background: none; border: none; cursor: pointer;
-  color: var(--color-body); font-family: var(--font-body); font-weight: 500; font-size: 0.875rem;
-  padding: 8px 12px; border-radius: var(--radius-sm);
+  color: var(--color-body); font-family: var(--font-body); font-weight: 600; font-size: 1rem;
+  padding: 6px 10px; border-radius: var(--radius-sm);
 }
 .nav-dropdown-trigger:hover, .nav-dropdown.is-open .nav-dropdown-trigger,
 .nav-dropdown-trigger.is-current-group {
