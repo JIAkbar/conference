@@ -18,8 +18,8 @@
 .grid > .reveal:nth-child(6) { transition-delay: 300ms; }
 
 .card:hover, .card:focus-within {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
+  border-color: rgba(20, 184, 166, 0.4);
+  box-shadow: var(--glow-accent);
 }
 
 .btn { transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease; }

@@ -1,13 +1,20 @@
-/* css/nav.css — header/nav/footer, responsive, hairline + minimal-shadow system */
+/* css/nav.css — header/nav/footer. Fixed, transparent + blurred nav over a dark theme (prisma.io reference) */
 .site-header {
-  position: sticky; top: 0; z-index: 100;
-  background: #FFFFFF;
-  border-bottom: 1px solid var(--color-border);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-height);
+  background: rgba(10, 14, 23, 0.6);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+.site-header.is-scrolled {
+  background: rgba(10, 14, 23, 0.85);
   box-shadow: var(--shadow-sm);
 }
 .site-header .container {
   display: flex; align-items: center; justify-content: space-between;
-  min-height: 64px; gap: var(--space-4);
+  height: var(--nav-height); gap: var(--space-4);
 }
 .brand {
   display: inline-flex; align-items: center; gap: 10px;
@@ -32,7 +39,7 @@
   position: relative;
   display: inline-block;
   white-space: nowrap;
-  color: var(--color-heading); text-decoration: none; font-weight: 500; font-size: 0.875rem;
+  color: var(--color-body); text-decoration: none; font-weight: 500; font-size: 0.875rem;
   padding: 8px 12px;
 }
 .site-nav a::after {
@@ -42,10 +49,10 @@
   transform: scaleX(0); transform-origin: left;
   transition: transform 200ms ease;
 }
-.site-nav a:hover { color: var(--color-accent); }
+.site-nav a:hover { color: #FFFFFF; }
 .site-nav a:hover::after,
 .site-nav a[aria-current="page"]::after { transform: scaleX(1); }
-.site-nav a[aria-current="page"] { color: var(--color-accent); }
+.site-nav a[aria-current="page"] { color: #FFFFFF; }
 
 .nav-actions { display: flex; align-items: center; gap: var(--space-3); }
 .nav-cta { padding: 9px 18px; font-size: 0.875rem; white-space: nowrap; }
@@ -68,9 +75,11 @@
   .nav-cta { display: none; }
   .nav-toggle { display: block; }
   .site-nav {
-    position: absolute; top: 64px; left: 0; right: 0;
-    background: #FFFFFF;
-    border-bottom: 1px solid var(--color-border);
+    position: absolute; top: var(--nav-height); left: 0; right: 0;
+    background: rgba(10, 14, 23, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow-md);
     max-height: 0; overflow: hidden; opacity: 0;
     transition: max-height 250ms ease, opacity 150ms ease;
@@ -87,9 +96,10 @@
 }
 
 .site-footer {
-  background: var(--color-heading); color: #CBD5E1;
+  background: var(--color-footer); color: var(--color-body);
   padding: var(--space-7) 0 var(--space-5);
   margin-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
 }
 .site-footer a { color: #FFFFFF; text-decoration: none; }
 .site-footer a:hover { color: var(--color-accent); text-decoration: underline; }
@@ -103,5 +113,5 @@
 .footer-grid li { margin-bottom: var(--space-2); }
 .footer-bottom {
   margin-top: var(--space-6); padding-top: var(--space-4);
-  border-top: 1px solid #334155; font-size: 0.8125rem; color: var(--color-tertiary);
+  border-top: 1px solid var(--color-border); font-size: 0.8125rem; color: var(--color-tertiary);
 }

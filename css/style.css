@@ -1,22 +1,23 @@
 /* css/style.css — Conference FV design tokens & base styles
-   Design system reference: Prisma-style (styles.refero.design/style/8e9e585f-5ad4-4273-8418-e1f82cdb51cf)
+   Design system reference: prisma.io (dark theme, fixed blurred nav, teal accent)
    Font substitution: Mona Sans -> Space Grotesk (not available on Google Fonts) */
 :root {
   --color-accent: #14B8A6;
-  --color-accent-hover: #0D9488;
-  --color-heading: #1D242F;
-  --color-body: #111827;
-  --color-secondary: #6B7280;
-  --color-tertiary: #9CA3AF;
-  --color-border: #E2E8F0;
-  --color-surface: #F3F4F6;
-  --color-bg: #FFFFFF;
-  --color-destructive: #DC2626;
+  --color-accent-hover: #2DD4BF;
+  --color-heading: #FFFFFF;
+  --color-body: #CBD5E1;
+  --color-secondary: #8B95A5;
+  --color-tertiary: #64748B;
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-surface: #12161F;
+  --color-bg: #0A0E17;
+  --color-bg-alt: #0D1220;
+  --color-footer: #05070C;
+  --color-destructive: #F87171;
   --color-on-accent: #FFFFFF;
 
   /* legacy aliases kept so existing inline var() references still resolve */
   --color-primary: var(--color-accent);
-  --color-secondary-legacy: var(--color-accent-hover);
   --color-fg: var(--color-heading);
   --color-muted: var(--color-surface);
   --color-muted-fg: var(--color-secondary);
@@ -31,9 +32,11 @@
   --radius-sm: 6px;
   --radius-md: 10px;
   --container-max: 1200px;
+  --nav-height: 64px;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px 0 rgba(0, 0, 0, 0.35);
+  --glow-accent: 0 0 0 1px rgba(20, 184, 166, 0.35), 0 4px 20px 0 rgba(20, 184, 166, 0.10);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -80,13 +83,32 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 @media (min-width: 768px) { .band { padding: var(--space-9) 0; } }
 @media (max-width: 640px) { .band { padding: var(--space-6) 0; } }
 
+/* Hero band: fixed nav overlays it transparently, so it needs extra top clearance */
+main > .band:first-child { padding-top: calc(var(--nav-height) + var(--space-8)); }
+@media (min-width: 768px) { main > .band:first-child { padding-top: calc(var(--nav-height) + var(--space-9)); } }
+
 .band--navy {
-  background: linear-gradient(180deg, #0D9488 0%, #14B8A6 55%, #FFFFFF 100%);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 900px 420px at 50% 0%, rgba(20, 184, 166, 0.22), transparent 65%),
+    var(--color-bg);
   color: #FFFFFF;
 }
+.band--navy::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 85%);
+  pointer-events: none;
+}
+.band--navy .container { position: relative; z-index: 1; }
 .band--navy h1, .band--navy h2, .band--navy h3 { color: #FFFFFF; }
-.band--navy a:not(.btn) { color: #E6FFFA; }
-.band--muted { background: var(--color-surface); }
+.band--navy a:not(.btn) { color: #99F6E4; }
+.band--muted { background: var(--color-bg-alt); }
 .band--white { background: var(--color-bg); }
 
 .btn {
@@ -106,13 +128,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 .btn--primary { background: var(--color-accent); color: #FFFFFF; }
 .btn--primary:hover { background: var(--color-accent-hover); }
-.btn--ghost { background: #FFFFFF; border-color: var(--color-border); color: var(--color-heading); }
+.btn--ghost { background: transparent; border-color: var(--color-border); color: var(--color-heading); }
 .btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
-.band--navy .btn--ghost { background: transparent; border-color: rgba(255,255,255,0.55); color: #FFFFFF; }
-.band--navy .btn--ghost:hover { border-color: #FFFFFF; background: rgba(255,255,255,0.1); }
 
 .card {
-  background: #FFFFFF;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
@@ -136,10 +156,10 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   border-radius: var(--radius-md);
   margin: 0 0 var(--space-4);
 }
-table { width: 100%; min-width: 480px; border-collapse: collapse; background: #FFFFFF; }
+table { width: 100%; min-width: 480px; border-collapse: collapse; background: var(--color-surface); }
 .table-scroll table { border: none; border-radius: 0; }
 th, td { text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--color-border); font-size: 0.9375rem; }
-th { font-family: var(--font-body); font-weight: 600; color: var(--color-heading); background: var(--color-surface); }
+th { font-family: var(--font-body); font-weight: 600; color: var(--color-heading); background: rgba(255, 255, 255, 0.03); }
 td { color: var(--color-body); }
 
 .avatar {
