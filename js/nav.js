@@ -15,6 +15,46 @@
     var href = link.getAttribute("href");
     if (href === currentPath) {
       link.setAttribute("aria-current", "page");
+      var parentDropdown = link.closest(".nav-dropdown");
+      if (parentDropdown) {
+        parentDropdown.querySelector(".nav-dropdown-trigger").classList.add("is-current-group");
+      }
+    }
+  });
+
+  // Dropdown submenus: click to open/close, close on outside click or Escape
+  var dropdowns = document.querySelectorAll(".nav-dropdown");
+  dropdowns.forEach(function (dropdown) {
+    var trigger = dropdown.querySelector(".nav-dropdown-trigger");
+    if (!trigger) return;
+    trigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = dropdown.classList.toggle("is-open");
+      trigger.setAttribute("aria-expanded", String(isOpen));
+      dropdowns.forEach(function (other) {
+        if (other !== dropdown) {
+          other.classList.remove("is-open");
+          other.querySelector(".nav-dropdown-trigger").setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  });
+  document.addEventListener("click", function (e) {
+    dropdowns.forEach(function (dropdown) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("is-open");
+        var trigger = dropdown.querySelector(".nav-dropdown-trigger");
+        if (trigger) trigger.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      dropdowns.forEach(function (dropdown) {
+        dropdown.classList.remove("is-open");
+        var trigger = dropdown.querySelector(".nav-dropdown-trigger");
+        if (trigger) trigger.setAttribute("aria-expanded", "false");
+      });
     }
   });
 

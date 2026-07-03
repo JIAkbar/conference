@@ -1,7 +1,8 @@
 /* css/style.css — Conference FV design tokens & base styles
-   Design system reference: prisma.io (dark theme, fixed blurred nav, teal accent)
+   Design system reference: prisma.io (light + dark theme, fixed blurred nav, teal accent)
    Font substitution: Mona Sans -> Space Grotesk (not available on Google Fonts) */
-:root {
+:root,
+[data-theme="dark"] {
   --color-accent: #14B8A6;
   --color-accent-hover: #2DD4BF;
   --color-heading: #FFFFFF;
@@ -12,10 +13,43 @@
   --color-surface: #12161F;
   --color-bg: #0A0E17;
   --color-bg-alt: #0D1220;
-  --color-footer: #05070C;
   --color-destructive: #F87171;
   --color-on-accent: #FFFFFF;
+  --hero-grad-1: rgba(20, 184, 166, 0.22);
+  --hero-text: #FFFFFF;
+  --hero-eyebrow: #99F6E4;
+  --hero-link: #99F6E4;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --nav-bg-a: rgba(10, 14, 23, 0.35);
+  --nav-bg-b: rgba(10, 14, 23, 0.82);
+  --nav-border-b: rgba(255, 255, 255, 0.08);
+  --th-bg: rgba(255, 255, 255, 0.03);
+}
+[data-theme="light"] {
+  --color-accent: #0D9488;
+  --color-accent-hover: #0F766E;
+  --color-heading: #0F172A;
+  --color-body: #334155;
+  --color-secondary: #64748B;
+  --color-tertiary: #94A3B8;
+  --color-border: #E2E8F0;
+  --color-surface: #FFFFFF;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F0FDFA;
+  --color-destructive: #DC2626;
+  --color-on-accent: #FFFFFF;
+  --hero-grad-1: rgba(94, 234, 212, 0.55);
+  --hero-text: #0F172A;
+  --hero-eyebrow: #0F766E;
+  --hero-link: #0D9488;
+  --grid-line: rgba(15, 23, 42, 0.06);
+  --nav-bg-a: rgba(255, 255, 255, 0.55);
+  --nav-bg-b: rgba(255, 255, 255, 0.88);
+  --nav-border-b: #E2E8F0;
+  --th-bg: rgba(15, 23, 42, 0.03);
+}
 
+:root {
   /* legacy aliases kept so existing inline var() references still resolve */
   --color-primary: var(--color-accent);
   --color-fg: var(--color-heading);
@@ -37,6 +71,13 @@
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px 0 rgba(0, 0, 0, 0.35);
   --glow-accent: 0 0 0 1px rgba(20, 184, 166, 0.35), 0 4px 20px 0 rgba(20, 184, 166, 0.10);
+
+  /* footer is a fixed dark anchor regardless of page theme */
+  --footer-bg: #05070C;
+  --footer-text: #CBD5E1;
+  --footer-heading: #FFFFFF;
+  --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-tertiary: #64748B;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -54,6 +95,7 @@ body {
   color: var(--color-body);
   background: var(--color-bg);
   font-feature-settings: "cv01", "cv02", "cv06", "cv08";
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 h1, h2, h3, h4 {
@@ -79,7 +121,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   padding: 0 var(--space-5);
 }
 
-.band { padding: var(--space-8) 0; }
+.band { padding: var(--space-8) 0; transition: background-color 200ms ease; }
 @media (min-width: 768px) { .band { padding: var(--space-9) 0; } }
 @media (max-width: 640px) { .band { padding: var(--space-6) 0; } }
 
@@ -91,23 +133,23 @@ main > .band:first-child { padding-top: calc(var(--nav-height) + var(--space-8))
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 900px 420px at 50% 0%, rgba(20, 184, 166, 0.22), transparent 65%),
+    radial-gradient(ellipse 900px 420px at 50% 0%, var(--hero-grad-1), transparent 65%),
     var(--color-bg);
-  color: #FFFFFF;
+  color: var(--hero-text);
 }
 .band--navy::before {
   content: "";
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 85%);
   pointer-events: none;
 }
 .band--navy .container { position: relative; z-index: 1; }
-.band--navy h1, .band--navy h2, .band--navy h3 { color: #FFFFFF; }
-.band--navy a:not(.btn) { color: #99F6E4; }
+.band--navy h1, .band--navy h2, .band--navy h3 { color: var(--hero-text); }
+.band--navy a:not(.btn) { color: var(--hero-link); }
 .band--muted { background: var(--color-bg-alt); }
 .band--white { background: var(--color-bg); }
 
@@ -136,7 +178,7 @@ main > .band:first-child { padding-top: calc(var(--nav-height) + var(--space-8))
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 200ms ease;
 }
 
 .grid {
@@ -159,7 +201,7 @@ main > .band:first-child { padding-top: calc(var(--nav-height) + var(--space-8))
 table { width: 100%; min-width: 480px; border-collapse: collapse; background: var(--color-surface); }
 .table-scroll table { border: none; border-radius: 0; }
 th, td { text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--color-border); font-size: 0.9375rem; }
-th { font-family: var(--font-body); font-weight: 600; color: var(--color-heading); background: rgba(255, 255, 255, 0.03); }
+th { font-family: var(--font-body); font-weight: 600; color: var(--color-heading); background: var(--th-bg); }
 td { color: var(--color-body); }
 
 .avatar {
