@@ -25,4 +25,23 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
+
+  if (!reduceMotion) {
+    document.querySelectorAll(".band--navy").forEach(function (hero) {
+      var field = document.createElement("div");
+      field.className = "particle-field";
+      field.setAttribute("aria-hidden", "true");
+      for (var i = 0; i < 36; i++) {
+        var p = document.createElement("span");
+        p.className = "particle";
+        p.style.left = (Math.random() * 100) + "%";
+        p.style.top = (Math.random() * 100) + "%";
+        p.style.transform = "rotate(" + Math.round(Math.random() * 360) + "deg)";
+        p.style.animationDelay = (Math.random() * 5).toFixed(2) + "s";
+        p.style.animationDuration = (4 + Math.random() * 3).toFixed(2) + "s";
+        field.appendChild(p);
+      }
+      hero.insertBefore(field, hero.firstChild);
+    });
+  }
 })();
