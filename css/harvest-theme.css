@@ -53,8 +53,12 @@
 .h-container { max-width: var(--h-max-width); margin: 0 auto; padding: 0 var(--h-space-24); }
 
 /* ---- Nav: single persistent solid bar, constant warm shadow, no scroll transform ---- */
-.h-nav { position: sticky; top: 0; z-index: 100; height: var(--h-nav-height); background: var(--h-white); box-shadow: var(--h-shadow-nav); }
-.h-nav__inner { max-width: var(--h-max-width); margin: 0 auto; padding: 0 var(--h-space-24); height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--h-space-24); }
+/* Nav is a floating rounded pill inset from the viewport edges (matches
+   getharvest.com: outer wrapper is sticky+transparent+padded, the pill
+   look lives on the inner bar so the sticky wrapper still reserves its
+   own layout space — no per-page hero padding compensation needed). */
+.h-nav { position: sticky; top: 0; z-index: 100; padding: 20px 20px 0; background: transparent; }
+.h-nav__inner { max-width: 1297px; margin: 0 auto; padding: 0 var(--h-space-24); height: var(--h-nav-height); display: flex; align-items: center; justify-content: space-between; gap: var(--h-space-24); background: var(--h-white); border-radius: 40px; box-shadow: var(--h-shadow-nav); }
 .h-nav__brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--h-ink); }
 .h-nav__brand img { height: 26px; width: auto; display: block; }
 .h-nav__brand span { font-size: 14px; font-weight: 700; }
