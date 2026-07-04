@@ -72,8 +72,8 @@
 }
 .apple-subnav.is-visible { transform: translateY(0); }
 .apple-subnav__inner { max-width: var(--a-max-width); margin: 0 auto; padding: 0 var(--a-space-24); height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--a-space-20); }
-.apple-subnav__links { display: flex; align-items: center; gap: var(--a-space-24); list-style: none; margin: 0; padding: 0; overflow-x: auto; }
-.apple-subnav__links a { color: var(--a-ink); text-decoration: none; font-size: 14px; font-weight: 400; padding-bottom: 4px; border-bottom: 3px solid transparent; white-space: nowrap; }
+.apple-subnav__links { display: flex; align-items: center; gap: var(--a-space-24); list-style: none; margin: 0; padding: 0; overflow-x: auto; overflow-y: hidden; height: 100%; }
+.apple-subnav__links a { color: var(--a-ink); text-decoration: none; font-size: 14px; font-weight: 400; padding-bottom: 4px; border-bottom: 3px solid transparent; white-space: nowrap; line-height: 1; }
 .apple-subnav__links a.is-active { border-bottom-color: var(--a-ink); font-weight: 600; }
 .apple-subnav__cta { background: var(--a-azure); color: #fff; border-radius: var(--a-radius-pill); padding: 6px 14px; font-size: 13px; font-weight: 400; text-decoration: none; white-space: nowrap; }
 
