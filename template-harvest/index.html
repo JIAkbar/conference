@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/harvest-theme.css?v=1">
+<link rel="stylesheet" href="../css/harvest-theme.css?v=4">
 <link rel="stylesheet" href="../css/template-switch.css?v=1">
 </head>
 <body class="harvest-page">
@@ -19,16 +19,32 @@
   <div class="h-nav__inner">
     <a class="h-nav__brand" href="index.html"><img src="../img/brand/icsaet-logo.webp" alt="ICSAET"><span>ICSAET 2026</span></a>
     <ul class="h-nav__links">
-      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="call-for-papers.html">Call for Papers</a></li>
-      <li><a href="speakers.html">Speakers</a></li>
-      <li><a href="committee.html">Committee</a></li>
-      <li><a href="program.html">Timeline</a></li>
-      <li><a href="registration.html">Registration</a></li>
-      <li><a href="venue.html">Venue</a></li>
-      <li><a href="sponsors.html">Partners</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li class="h-nav-dropdown">
+        <button class="h-nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+          Conference
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="h-nav-dropdown-panel">
+          <a href="speakers.html">Speakers</a>
+          <a href="committee.html">Committee</a>
+          <a href="program.html">Timeline</a>
+        </div>
+      </li>
+      <li class="h-nav-dropdown">
+        <button class="h-nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+          Attend
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="h-nav-dropdown-panel">
+          <a href="registration.html">Registration</a>
+          <a href="venue.html">Venue</a>
+          <a href="sponsors.html">Partners</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </li>
     </ul>
     <a class="h-nav__cta" href="registration.html">Register Now</a>
   </div>
@@ -140,7 +156,7 @@
 
 <div class="template-switch" data-current="harvest" data-templates='[{"key": "classic", "label": "Classic", "url": "../index.html"}, {"key": "apple", "label": "Apple-style", "url": "../template-apple/index.html"}, {"key": "harvest", "label": "Harvest-style", "url": "index.html"}]'></div>
 
-<script src="../js/harvest-nav.js?v=1"></script>
+<script src="../js/harvest-nav.js?v=2"></script>
 <script src="../js/template-switch.js?v=1"></script>
 </body>
 </html>
