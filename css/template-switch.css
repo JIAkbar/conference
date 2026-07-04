@@ -1,0 +1,29 @@
+/* css/template-switch.css — floating template A/B switcher pill, shared by
+   Template A's 3 demo pages and template-apple/'s pages. Self-contained
+   (dark translucent), theme-agnostic so it reads on any background. */
+.template-switch {
+  position: fixed; right: 16px; bottom: 16px; z-index: 300;
+  display: inline-flex; gap: 2px;
+  background: rgba(20, 20, 24, 0.92);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+}
+.template-switch button {
+  border: none; cursor: pointer;
+  background: transparent; color: rgba(255, 255, 255, 0.65);
+  font-size: 13px; font-weight: 600;
+  padding: 8px 14px; border-radius: 999px;
+  transition: background-color 150ms ease, color 150ms ease;
+  white-space: nowrap;
+}
+.template-switch button.is-active {
+  background: #ffffff; color: #14161c;
+}
+@media (max-width: 480px) {
+  .template-switch { right: 8px; bottom: 8px; }
+  .template-switch button { padding: 7px 10px; font-size: 12px; }
+}
