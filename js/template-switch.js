@@ -1,23 +1,28 @@
-// js/template-switch.js — floating pill toggle between Template A ("classic")
-// and Template B ("apple") versions of the SAME page. Only wired on the 3
-// demo pages that have both versions (Home, Speakers, Program).
+// js/template-switch.js — floating pill toggle between however many template
+// versions the current page has. Reads a JSON list from data-templates
+// instead of a hardcoded pair, so adding a 3rd/4th/5th template is just
+// adding another entry to that list — no JS changes needed.
 (function () {
   var el = document.querySelector(".template-switch");
   if (!el) return;
+
   var current = el.getAttribute("data-current");
-  var targets = {
-    classic: el.getAttribute("data-classic"),
-    apple: el.getAttribute("data-apple")
-  };
+  var templates;
+  try { templates = JSON.parse(el.getAttribute("data-templates")); } catch (e) { templates = null; }
+  if (!templates || !templates.length) return;
+
   try { localStorage.setItem("icsaetTemplate", current); } catch (e) {}
 
-  el.querySelectorAll("button[data-target]").forEach(function (btn) {
-    var key = btn.getAttribute("data-target");
-    btn.classList.toggle("is-active", key === current);
-    if (key !== current) {
+  templates.forEach(function (t) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = t.label;
+    btn.classList.toggle("is-active", t.key === current);
+    if (t.key !== current) {
       btn.addEventListener("click", function () {
-        window.location.href = targets[key];
+        window.location.href = t.url;
       });
     }
+    el.appendChild(btn);
   });
 })();
