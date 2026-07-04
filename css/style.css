@@ -25,6 +25,10 @@
   --nav-border-a: rgba(255, 255, 255, 0.06);
   --nav-border-b: rgba(255, 255, 255, 0.10);
   --th-bg: rgba(255, 255, 255, 0.03);
+  --footer-bg: #030712;
+  --footer-text: #F7FAFC;
+  --footer-heading: #F9FAFB;
+  --footer-border: rgba(255, 255, 255, 0.08);
 }
 [data-theme="light"] {
   --color-accent: #0D9488;
@@ -49,6 +53,10 @@
   --nav-border-a: rgba(15, 23, 42, 0.06);
   --nav-border-b: #E2E8F0;
   --th-bg: rgba(15, 23, 42, 0.03);
+  --footer-bg: #FFFFFF;
+  --footer-text: #1D242F;
+  --footer-heading: #111827;
+  --footer-border: #E5E7EB;
 }
 
 :root {
@@ -73,12 +81,6 @@
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px 0 rgba(0, 0, 0, 0.35);
   --glow-accent: 0 0 0 1px rgba(20, 184, 166, 0.35), 0 4px 20px 0 rgba(20, 184, 166, 0.10);
-
-  /* footer is a fixed dark anchor regardless of page theme */
-  --footer-bg: #05070C;
-  --footer-text: #CBD5E1;
-  --footer-heading: #FFFFFF;
-  --footer-border: rgba(255, 255, 255, 0.08);
   --footer-tertiary: #64748B;
 }
 

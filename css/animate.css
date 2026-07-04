@@ -24,7 +24,9 @@
 
 .btn { transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease; }
 
-/* Decorative twinkling particle field in the hero (prisma.io reference), JS-generated */
+/* Decorative drifting/rotating/pulsing particle field in the hero (prisma.io reference),
+   JS-driven every frame — see js/animate.js. No CSS animation here since transform/opacity
+   are written directly per-frame (drift position + spin + scale-pulse, like grains of light). */
 .particle-field {
   position: absolute; inset: 0;
   overflow: hidden; pointer-events: none; z-index: 0;
@@ -33,12 +35,7 @@
   position: absolute;
   width: 3px; height: 9px; border-radius: 2px;
   background: var(--color-accent);
-  opacity: 0;
-  animation: particle-twinkle 5s ease-in-out infinite;
-}
-@keyframes particle-twinkle {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 0.65; }
+  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
