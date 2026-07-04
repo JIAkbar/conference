@@ -203,7 +203,7 @@
   width: 36px; height: 36px; border-radius: 50%;
   background: var(--footer-border); color: var(--footer-heading);
 }
-.footer-social a:hover { background: var(--color-accent); text-decoration: none; }
+.footer-social a:hover { background: var(--footer-link-hover-bg); text-decoration: none; }
 .footer-social svg { width: 16px; height: 16px; }
 .footer-grid {
   display: grid; gap: var(--space-5);
@@ -225,8 +225,7 @@
   transition: background-color 150ms ease, color 150ms ease;
 }
 .footer-grid a:hover {
-  background: var(--footer-border);
-  color: var(--footer-heading) !important;
+  background: var(--footer-link-hover-bg);
 }
 .footer-bottom {
   margin-top: var(--space-6); padding-top: var(--space-4);

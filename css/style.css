@@ -29,6 +29,7 @@
   --footer-text: #F7FAFC;
   --footer-heading: #F9FAFB;
   --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-link-hover-bg: #134E4A;
 }
 [data-theme="light"] {
   --color-accent: #0D9488;
@@ -57,6 +58,7 @@
   --footer-text: #1D242F;
   --footer-heading: #111827;
   --footer-border: #E5E7EB;
+  --footer-link-hover-bg: #CCFBF1;
 }
 
 :root {
