@@ -48,6 +48,8 @@ def check_internal_links(html_files):
     for f in html_files:
         text = f.read_text(encoding="utf-8")
         for href in href_re.findall(text):
+            if href.startswith("http://") or href.startswith("https://"):
+                continue  # absolute URLs (canonical, og:url, external sites) aren't local files
             if href not in known:
                 failures.append(f"{f.name}: links to missing page {href!r}")
     return failures

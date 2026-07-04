@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /template-apple/
+
+Sitemap: https://icsaet.pages.dev/sitemap.xml
