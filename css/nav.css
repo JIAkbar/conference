@@ -43,13 +43,8 @@
   letter-spacing: 0.01em;
   color: var(--color-heading); text-decoration: none;
 }
-.brand-mark {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; border-radius: var(--radius-sm); flex-shrink: 0;
-  background: var(--color-accent);
-  color: #FFFFFF; font-family: var(--font-heading); font-weight: 700; font-size: 0.8rem;
-}
-.brand span { color: var(--color-accent); }
+.brand-logo { display: block; height: 30px; width: auto; flex-shrink: 0; }
+.brand-year { color: var(--color-accent); }
 
 .site-nav { display: flex; }
 .site-nav > ul {
